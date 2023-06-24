@@ -1,0 +1,160 @@
+ASSIGNMENT ANSWERS 1
+
+#QUESTION 1
+public class Main{
+public static void main(String[] args){
+int nums[] = {-2,7,11,5,2};
+int target = 9;
+int output[] = new int[2];
+for(int i=0; i<nums.length; i++){
+for(int j=i+1; j<nums.length; j++){
+if((nums[i]+nums[j])==target){
+output[0] = i;
+output[1] = j;
+break;
+}
+}
+}
+System.out.println(output[0]+" "+output[1]);
+}
+}
+
+
+
+ 
+#QUESTION 2
+public class Main{
+public static void main(String[] args){
+int ar[] = {3,2,2,3};
+int target = 3;
+int n = remov(ar, target);
+System.out.println(n);
+for(int i=0; i<ar.length; i++){
+System.out.print(" "+ar[i]);
+}
+}
+public static int remov(int ar[], int target){
+int c=0;
+for(int i=0; i<ar.length; i++){
+if(ar[i] == target){
+shift(ar, i, ar.length-1-c);
+ar[ar.length-1-c]=0;
+c++;
+}
+}
+return c;
+}
+public static void shift(int ar[],int from, int till){
+for(int i=from; i<till; i++){
+ar[i] = ar[i+1];
+}
+}
+}
+
+ 
+#QUESTION 3
+def searchInsert(nums, target):
+start = 0
+end = len(nums) - 1
+while start <= end:
+mid = (start + end) // 2
+if nums[mid] == target:
+return mid
+elif target < nums[mid]:
+end = mid - 1
+else:
+start = mid + 1
+return start
+nums = [1, 3, 5, 6]
+target = 5
+print(searchInsert(nums, target))
+
+
+
+ 
+#QUESTION 4
+public class Main{
+public static void main(String[] args){
+int ar[] = {1,2,3,4};
+ar[ar.length-1]=ar[ar.length-1]+1;
+for(int i=0; i<ar.length; i++){
+System.out.print(ar[i]+" ");
+}
+}
+}
+ 
+#QUESTION 5
+public class Main {
+public static int[] merge(int[] nums1, int m, int[] nums2, int n) {
+int i = m - 1;
+int j = n - 1;
+int k = m + n - 1;
+while (i >= 0 && j >= 0) {
+if (nums1[i] > nums2[j]) {
+nums1[k] = nums1[i];
+i--;
+} else {
+nums1[k] = nums2[j];
+j--;
+}
+k--;
+}
+while (j >= 0) {
+nums1[k] = nums2[j];
+j--;
+k--;
+}
+return nums1;
+}
+public static void main(String[] args) {
+int[] nums1 = {1, 3, 5, 0, 0, 0};
+int m = 3;
+int[] nums2 = {2, 4, 6};
+int n = 3;
+int[] merge = merge(nums1, m, nums2, n);
+for(int i=0; i<merge.length; i++) {
+System.out.print(merge[i]+" ");
+}
+}
+}
+ 
+#QUESTION 6
+nums = [1,2,3,1]
+n1 = list(set(nums))
+n1 = len(n1)
+n2 = len(nums)
+print((n1!=n2))
+ 
+#QUESTION 7
+public class Main{
+public static void main(String[] args){
+int ar[] = {0,1,2,0,3,1,0,0,3,9};
+int l = 0;
+for(int i=0; i<ar.length; i++){
+if(ar[i]!=0){
+ar[l] = ar[i];
+l++;
+}
+}
+while(l<ar.length){
+ar[l]=0;
+l++;
+}
+for(int i=0; i<ar.length; i++){
+System.out.print(ar[i]+" ");
+}
+}
+}
+ 
+#QUESTION 8
+public class Main{
+public static void main(String[] args){
+int ar[] = {1,2,2,4};
+for(int i=0; i<ar.length-1; i++){
+if(ar[i]==ar[i+1]){
+System.out.println(ar[i]+" "+(ar[i]+1));
+break;
+}
+}
+}
+}
