@@ -1,0 +1,12 @@
+s = "loveleetcode"
+def repeat(s):
+    s = list(s)
+    index = 0
+    for i in s:
+        if s.count(i)==1:
+            return index
+        index+=1
+    return -1
+
+repeat(s)
+        

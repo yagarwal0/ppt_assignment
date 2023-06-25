@@ -1,0 +1,14 @@
+ar = [0,1,0,3,12]
+
+i=0
+l=len(ar)
+v=0
+while i<l:
+    if(ar[i]!=0):
+        ar[v]=ar[i]
+        v=v+1
+    i=i+1
+while(v<l):
+    ar[v]=0
+    v=v+1
+print(ar)
