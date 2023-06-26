@@ -1,0 +1,113 @@
+ASSIGNMENT QUESTION 2
+
+Question 1
+def arraySum(nums):
+	nums.sort()
+	max_sum = 0
+	
+	for i in range(0, len(nums), 2):
+		max_sum += nums[i]
+	return max_sum
+
+nums = [1,4,3,2]
+print(arraySum(nums))
+
+ 
+Question 2
+def maxCandy(candy):
+	unique_candies = set(candy)
+	max_candies = len(canty)
+	return min(len(unique_candies), max_candies)
+
+candy = [1,1,2,2,3,3]
+print(maxCandy(candy))
+
+ 
+Question 3
+def harSeq(num):
+	dict = {}
+	max_len = 0
+	for  i in nums:
+		dict[i] = dict.get(i,0)+1
+		if i+1 in dict:
+			max_len = max(max_len, dict[i]+ dict[i+1])
+		if i-1 in dict:
+			max_len = max(max_len, dict[i]+ dict[i-1])
+	return max_len
+nums = [1,3,2,2,5,2,3,7]
+print(harSeq(nums))
+ 
+Question 4
+def FB(flowerbed, n):
+	c=0
+	for i in range(len(flowerbed)):
+		if(flowerbed[i]==0 and 
+(i == 0 or flowerbed[i - 1] == 0) and
+            	(i == len(flowerbed) - 1 or flowerbed[i + 1] == 0)):
+			c+=1
+			flowerbed[i]=1
+	return c>= n
+print(FB([1,0,0,0,1], 1))
+ 
+Question 5
+nums = [1,2,3,6,4,44,4,4,4,4,4]
+nums.sort()
+m=nums[-1]*nums[-2]*nums[-3]
+
+print(m)
+ 
+Question 6
+nums = [-1,0,3,4,5,7,9,12]
+target = 5
+
+def BS(nums, target):
+    start = 0
+    end = len(nums)-1
+
+    while(start<=end):
+        mid = (start+end)//2 
+        if(target>nums[mid]):
+            start = mid+1 
+        elif(nums[mid]>target):
+            end = mid-1 
+        else:
+            return mid 
+        
+    
+    return -1
+    
+print(BS(nums, target))
+ 
+Question 7
+nums = [1,2,2,4,3]
+n1=nums.copy()
+n1.sort()
+if(nums==n1 or nums[::-1]==n1):
+    print(True)
+else:
+    print(False)
+
+ 
+Question 8
+def minimumScore(nums, k):
+    min_val = float('inf')
+    max_val = float('-inf')
+    
+    for num in nums:
+        min_val = min(min_val, num)
+        max_val = max(max_val, num)
+        curr_score = max_val - min_val
+        if curr_score == 0:
+            return 0
+    
+    result = float('inf')
+    
+    for num in nums:
+        min_num = num - k
+        max_num = num + k
+        min_val = min(min_val, min_num)
+        max_val = max(max_val, max_num)
+        result = min(result, max_val - min_val)
+    
+    return result
+
