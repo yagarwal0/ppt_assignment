@@ -1,0 +1,163 @@
+ASSIGNMENT QUESTIONS 4
+
+QUESTION 1
+
+def p1(arr1, arr2, arr3):
+    p1 = p2 = p3 = 0
+    result = []
+
+    while p1 < len(arr1) and p2 < len(arr2) and p3 < len(arr3):
+        if arr1[p1] == arr2[p2] == arr3[p3]:
+            result.append(arr1[p1])
+            p1 += 1
+            p2 += 1
+            p3 += 1
+        elif arr1[p1] < arr2[p2] or arr1[p1] < arr3[p3]:
+            p1 += 1
+        elif arr2[p2] < arr1[p1] or arr2[p2] < arr3[p3]:
+            p2 += 1
+        elif arr3[p3] < arr1[p1] or arr3[p3] < arr2[p2]:
+            p3 += 1
+
+    return result
+
+arr1 = [1, 2, 3, 4, 5]
+arr2 = [1, 2, 5, 7, 9]
+arr3 = [1, 3, 4, 5, 8]
+
+result = p1(arr1, arr2, arr3)
+print(result)
+
+
+QUESTION 2
+
+def p2(nums1, nums2):
+    n1 = []
+    n2 = []
+
+    for num in nums1:
+        if num not in nums2 and num not in n1:
+            n1.append(num)
+
+    for num in nums2:
+        if num not in nums1 and num not in n2:
+            n2.append(num)
+
+    return [n1, n2]
+
+nums1 = [1, 2, 3]
+nums2 = [2, 4, 6]
+
+result = p2(nums1, nums2)
+print(result)
+
+
+QUESTION 3
+
+def p3(matrix):
+    r = len(matrix)
+    c = len(matrix[0])
+
+    mat = [[0 for _ in range(r)] for _ in range(c)]
+
+    for i in range(r):
+        for j in range(c):
+            mat[j][i] = matrix[i][j]  # Swap the elements
+
+    return mat
+
+matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+mat = p3(matrix)
+print(mat)
+
+
+
+QUESTION 4
+
+def p4(nums):
+    nums.sort()
+    pair_sum = 0
+
+    for i in range(0, len(nums), 2):
+        pair_sum += nums[i]
+
+    return pair_sum
+
+# Example usage
+nums = [1, 4, 3, 2]
+
+max_sum = p4(nums)
+print(max_sum)
+
+
+
+QUESTION 5
+
+def p5(n):
+    k = 0
+
+    while n >= k:
+        k += 1
+        n -= k
+
+    return k - 1
+
+n = 5
+
+rows = p5(n)
+print(rows)
+
+
+QUESTION 6
+
+def p6(nums):
+    for i in range(len(nums)):
+        nums[i] = nums[i] ** 2  # Square each element
+
+    nums.sort()  # Sort the nums array in non-decreasing order
+
+    return nums
+
+nums = [-4, -2, 0, 2, 4]
+
+result = p6(nums)
+print(result)
+
+
+QUESTION 7
+
+def P7(m, n, ops):
+    if not ops:
+        return m * n
+
+    min_ai = min(op[0] for op in ops)
+    min_bi = min(op[1] for op in ops)
+
+    return min_ai * min_bi
+
+m = 3
+n = 3
+ops = [[2, 2], [3, 3]]
+
+count = P7(m, n, ops)
+print(count)
+
+
+QUESTION 8
+
+def P8(nums):
+    n = len(nums) // 2  # Number of pairs
+
+    arr = []
+
+    for i in range(n):
+        arr.append(nums[i])
+        arr.append(nums[i + n])
+
+    return arr
+
+nums = [2,5,1,3,4,7]
+
+result = P8(nums)
+print(result)
