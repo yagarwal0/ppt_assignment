@@ -1,0 +1,265 @@
+ASSIGNMENT QUESTION 8 
+
+
+QUESTION 1
+
+def P1(s1, s2):
+    memo = {}
+    
+    def helper(i, j):
+        if (i, j) in memo:
+            return memo[(i, j)]
+        
+        if i == len(s1) and j == len(s2):
+            return 0
+        
+        if i == len(s1):
+            return sum(ord(ch) for ch in s2[j:])
+        
+        if j == len(s2):
+            return sum(ord(ch) for ch in s1[i:])
+        
+        if s1[i] == s2[j]:
+            memo[(i, j)] = helper(i+1, j+1)
+        else:
+            memo[(i, j)] = min(ord(s1[i]) + helper(i+1, j), ord(s2[j]) + helper(i, j+1))
+        
+        return memo[(i, j)]
+    
+    return helper(0, 0)
+
+s1 = "sea"
+s2 = "eat"
+result = P1(s1, s2)
+print(result)
+
+
+QUESTION 2
+
+def P2(s):
+    if not s:
+        return True
+    if len(s) == 1 or s[0] == ')' or s[-1] == '(':
+        return False
+
+    for i in range(len(s)):
+        if s[i] == '*':
+            # Try treating '*' as '(', ')', or an empty string
+            return is_valid(s[:i] + '(' + s[i+1:]) or \
+                   is_valid(s[:i] + ')' + s[i+1:]) or \
+                   is_valid(s[:i] + s[i+1:])
+
+        if s[i] == '(':
+            count = 1
+            j = i + 1
+            while j < len(s):
+                if s[j] == '(':
+                    count += 1
+                elif s[j] == ')':
+                    count -= 1
+                if count == 0:
+                    break
+                j += 1
+
+            if j == len(s):
+                return False
+
+            return is_valid(s[i+1:j]) and is_valid(s[j+1:])
+
+    return False
+
+s = "()"
+print(is_valid(s))
+
+
+QUESTION 3
+
+def P3(word1, word2):
+    def helper(i, j):
+        if i == 0:
+            return j
+        if j == 0:
+            return i
+
+        if word1[i - 1] == word2[j - 1]:
+            return helper(i - 1, j - 1)
+
+        return 1 + min(helper(i - 1, j), helper(i, j - 1))
+
+    return helper(len(word1), len(word2))
+
+word1 = "sea"
+word2 = "eat"
+print(P3(word1, word2))
+
+
+QUESTION 4
+
+class TreeNode:
+    def __init__(self, value):
+        self.val = value
+        self.left = None
+        self.right = None
+
+
+def construct_binary_tree(s):
+    if not s:
+        return None
+
+    index = s.find("(")
+
+    if index == -1:
+        return TreeNode(int(s))
+
+    value = int(s[:index])
+
+    count = 0
+    i = index
+
+    while i < len(s):
+        if s[i] == "(":
+            count += 1
+        elif s[i] == ")":
+            count -= 1
+
+        if count == 0:
+            break
+
+        i += 1
+
+    node = TreeNode(value)
+    node.left = construct_binary_tree(s[index+1:i])
+    node.right = construct_binary_tree(s[i+2:-1])
+
+    return node
+
+s = "4(2(3)(1))(6(5))"
+root = construct_binary_tree(s)
+
+
+QUESTION 5
+
+def P5(chars):
+    if not chars:
+        return 0
+
+    write_idx = 0
+    count = 1
+
+    for i in range(1, len(chars)):
+        if chars[i] == chars[i - 1]:
+            count += 1
+        else:
+            chars[write_idx] = chars[i - 1]  # Write the character
+
+            if count > 1:
+                count_str = str(count)
+                chars[write_idx + 1 : write_idx + 1 + len(count_str)] = count_str
+                write_idx += len(count_str)
+
+            write_idx += 1
+            count = 1
+
+    chars[write_idx] = chars[-1]
+
+    if count > 1:
+        count_str = str(count)
+        chars[write_idx + 1 : write_idx + 1 + len(count_str)] = count_str
+        write_idx += len(count_str)
+
+    return write_idx + 1
+
+chars = ["a", "a", "b", "b", "c", "c", "c"]
+P5(chars)
+print(chars)
+
+
+QUESTION 6
+
+def P6(s, p):
+    result = []
+    p_count = [0] * 26
+    s_count = [0] * 26
+    window_size = len(p)
+    
+    for char in p:
+        p_count[ord(char) - ord('a')] += 1
+    
+    for i in range(window_size):
+        s_count[ord(s[i]) - ord('a')] += 1
+    
+    if s_count == p_count:
+        result.append(0)
+    
+    for i in range(window_size, len(s)):
+        s_count[ord(s[i - window_size]) - ord('a')] -= 1
+        s_count[ord(s[i]) - ord('a')] += 1
+        
+        if s_count == p_count:
+            result.append(i - window_size + 1)
+    
+    return result
+
+s = "cbaebabacd"
+p = "abc"
+indices = P6(s, p)
+print(indices)  
+
+
+QUESTION 7
+
+def P7(s):
+    stack = []
+    current_num = 0
+    current_str = ""
+    
+    for char in s:
+        if char.isdigit():
+            current_num = current_num * 10 + int(char)
+        elif char == '[':
+            stack.append((current_str, current_num))
+            current_str = ""
+            current_num = 0
+        elif char == ']':
+            prev_str, num = stack.pop()
+            current_str = prev_str + current_str * num
+        else:
+            current_str += char
+    
+    return current_str
+
+s = "3[a]2[bc]"
+decoded_str = P7(s)
+print(decoded_str)
+
+
+QUESTION 8
+
+def P8(s, goal):
+    if len(s) != len(goal):
+        return False
+    
+    if s == goal:
+        # Check if there are any duplicate characters in s
+        seen = set()
+        for char in s:
+            if char in seen:
+                return True
+            seen.add(char)
+        return False
+    
+    indices = []
+    for i in range(len(s)):
+        if s[i] != goal[i]:
+            indices.append(i)
+    
+    if len(indices) != 2:
+        return False
+    
+    i, j = indices
+    return s[i] == goal[j] and s[j] == goal[i]
+
+s = "ab"
+goal = "ba"
+result = P8(s, goal)
+print(result)
