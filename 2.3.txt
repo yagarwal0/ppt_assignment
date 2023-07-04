@@ -1,0 +1,5 @@
+l = [x for x in range(100,1001, 100)]
+s = 0
+for i in l:
+    s=s+i
+print(s/len(l))

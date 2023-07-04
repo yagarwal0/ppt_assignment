@@ -1,0 +1,13 @@
+import numpy as np
+import scipy.stats as stats
+
+def perform_hypothesis_test(s1, s2):
+    t_stats, p_val = stats.ttest_ind(s1, s2)
+    return p_val
+    
+s1 = np.random.randint(1, 101, 100)
+s2 = np.random.randint(1, 101, 100)
+
+p_value = perform_hypothesis_test(s1, s2)
+
+print(f"The p_value of the sample is {p_value}")
